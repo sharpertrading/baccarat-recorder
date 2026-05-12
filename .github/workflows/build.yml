@@ -6,82 +6,81 @@ on:
       - 'v*.*.*'
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            build_cmd: npm run build:linux
-            setup_cmd: sudo apt-get install -y libfuse2
-          - os: windows-latest
-            build_cmd: npm run build:win
-            setup_cmd: echo "no setup needed"
-          - os: macos-latest
-            build_cmd: npm run build:mac
-            setup_cmd: echo "no setup needed"
 
-    runs-on: ${{ matrix.os }}
-
+  build-linux:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
-      - name: Platform setup
-        run: ${{ matrix.setup_cmd }}
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: ${{ matrix.build_cmd }}
+      - run: npm ci
+      - run: sudo apt-get install -y libfuse2
+      - run: npm run build:linux
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Skip Mac code signing — users right-click → Open on first launch
-          CSC_IDENTITY_AUTO_DISCOVERY: false
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: installer-${{ matrix.os }}
-          path: |
-            dist/*.AppImage
-            dist/*.exe
-            dist/*.dmg
-          if-no-files-found: warn
+          name: linux-installer
+          path: dist/*.AppImage
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: dist/*.exe
+
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build:mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac-installer
+          path: dist/*.dmg
 
   release:
-    needs: build
+    needs: [build-linux, build-windows, build-mac]
     runs-on: ubuntu-latest
-
     steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           path: artifacts
           merge-multiple: true
-
-      - name: List artifacts
+      - name: List files
         run: ls -lh artifacts/
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v2
         with:
           name: Baccarat Recorder ${{ github.ref_name }}
           body: |
             ## Baccarat Recorder ${{ github.ref_name }}
 
-            ### Downloads
-            | Platform | File |
-            |----------|------|
-            | 🪟 Windows | `Baccarat-Recorder-Setup.exe` — run the installer |
-            | 🍎 Mac | `Baccarat-Recorder.dmg` — open and drag to Applications (right-click → Open on first launch) |
-            | 🐧 Linux | `Baccarat-Recorder.AppImage` — mark executable and run |
+            | Platform | File | Instructions |
+            |----------|------|--------------|
+            | 🪟 Windows | `Baccarat-Recorder-Setup.exe` | Run the installer, follow the wizard |
+            | 🍎 Mac | `Baccarat-Recorder.dmg` | Open DMG, drag to Applications. Right-click → Open on first launch |
+            | 🐧 Linux | `Baccarat-Recorder.AppImage` | Mark as executable, double-click to run |
           files: artifacts/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
