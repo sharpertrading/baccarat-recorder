@@ -12,10 +12,13 @@ jobs:
         include:
           - os: ubuntu-latest
             build_cmd: npm run build:linux
+            setup_cmd: sudo apt-get install -y libfuse2
           - os: windows-latest
             build_cmd: npm run build:win
+            setup_cmd: echo "no setup needed"
           - os: macos-latest
             build_cmd: npm run build:mac
+            setup_cmd: echo "no setup needed"
 
     runs-on: ${{ matrix.os }}
 
@@ -28,6 +31,9 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Platform setup
+        run: ${{ matrix.setup_cmd }}
 
       - name: Install dependencies
         run: npm ci
