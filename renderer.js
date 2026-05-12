@@ -8,8 +8,8 @@ if (!window.electronAPI) {
   };
 }
 
-const CELL   = 44;
-const RADIUS = 18;
+const CELL   = 26;
+const RADIUS = 10;
 
 const STYLE = {
   B: { fill: '#c40000', ring: '#ff6666' },
@@ -107,7 +107,7 @@ function drawCircle(ctx, col, row, side) {
 
   // letter
   ctx.fillStyle    = '#ffffff';
-  ctx.font         = 'bold 14px Arial, sans-serif';
+  ctx.font         = 'bold 8px Arial, sans-serif';
   ctx.textAlign    = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(side, cx, cy);
@@ -141,7 +141,7 @@ function renderCanvas(canvasId, entries, fixedRows) {
   }
 
   const cols = Math.max(maxCol + 3, 22);
-  const rows = fixedRows !== undefined ? fixedRows : Math.max(maxRow + 2, 8);
+  const rows = fixedRows !== undefined ? fixedRows : Math.max(maxRow + 2, 6);
 
   canvas.width  = cols * CELL;
   canvas.height = rows * CELL;

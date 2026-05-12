@@ -19,18 +19,14 @@
     <button id="btnTop">&#128204; Top</button>
   </div>
 
-  <!-- Row 2: entry buttons + hands -->
+  <!-- Row 2: entry buttons -->
   <div class="entry-bar">
     <button id="btnPlayer">Player</button>
     <button id="btnTie">Tie</button>
     <button id="btnBanker">Banker</button>
-    <div class="hands-btn">
-      <span class="hb-label">Hands</span>
-      <span class="hb-count" id="handsCount">0</span>
-    </div>
   </div>
 
-  <!-- Row 3: per-outcome counts -->
+  <!-- Row 3: per-outcome counts + hands -->
   <div class="count-bar">
     <div class="count-cell player">
       <span class="cc-label">Player</span>
@@ -43,6 +39,10 @@
     <div class="count-cell banker">
       <span class="cc-label">Banker</span>
       <span class="cc-value" id="bankerCount">0</span>
+    </div>
+    <div class="count-cell hands">
+      <span class="cc-label">Hands</span>
+      <span class="cc-value" id="handsCount">0</span>
     </div>
   </div>
 

@@ -97,17 +97,6 @@ body {
 #btnTie    { background: #1a7a35; color: #fff; }
 #btnBanker { background: #c40000; color: #fff; }
 
-.hands-btn {
-  flex: 0 0 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #2c2c2c;
-  border-radius: 8px;
-  padding: 5px 0;
-}
-.hands-btn .hb-label { font-size: 11px; color: #888; }
-.hands-btn .hb-count { font-size: 16px; font-weight: 700; color: #e8e8e8; }
 
 /* ── Count display ── */
 .count-bar {

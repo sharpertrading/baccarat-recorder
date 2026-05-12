@@ -7,10 +7,10 @@ function createWindow() {
   const icon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.png'));
 
   win = new BrowserWindow({
-    width: 960,
-    height: 660,
-    minWidth: 700,
-    minHeight: 520,
+    width: 480,
+    height: 420,
+    minWidth: 380,
+    minHeight: 380,
     title: 'Baccarat Recorder',
     icon: icon,
     backgroundColor: '#1a1a1a',
