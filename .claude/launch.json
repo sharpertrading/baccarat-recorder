@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "baccarat-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "5199", "-s", "."],
+      "port": 5199
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baccarat Recorder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Row 1: utility controls -->
+  <div class="controls-bar">
+    <img src="assets/icon.png" class="app-icon" alt="Baccarat Recorder">
+    <button id="btnBack">&#8592; Back</button>
+    <input type="number" id="beadRows" min="3" max="15" value="6" title="Bead Road rows">
+    <span class="rows-label">rows</span>
+    <button id="btnClear">Clear All</button>
+    <div style="flex:1"></div>
+    <button id="btnTop">&#128204; Top</button>
+  </div>
+
+  <!-- Row 2: entry buttons + hands -->
+  <div class="entry-bar">
+    <button id="btnPlayer">Player</button>
+    <button id="btnTie">Tie</button>
+    <button id="btnBanker">Banker</button>
+    <div class="hands-btn">
+      <span class="hb-label">Hands</span>
+      <span class="hb-count" id="handsCount">0</span>
+    </div>
+  </div>
+
+  <!-- Row 3: per-outcome counts -->
+  <div class="count-bar">
+    <div class="count-cell player">
+      <span class="cc-label">Player</span>
+      <span class="cc-value" id="playerCount">0</span>
+    </div>
+    <div class="count-cell tie">
+      <span class="cc-label">Tie</span>
+      <span class="cc-value" id="tieCount">0</span>
+    </div>
+    <div class="count-cell banker">
+      <span class="cc-label">Banker</span>
+      <span class="cc-value" id="bankerCount">0</span>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="panelMain">Main Road</button>
+    <button class="tab-btn"        data-tab="panelBead">Bead Road</button>
+  </div>
+
+  <div id="panelMain" class="tab-panel active">
+    <canvas id="mainCanvas"></canvas>
+  </div>
+
+  <div id="panelBead" class="tab-panel">
+    <canvas id="beadCanvas"></canvas>
+  </div>
+
+  <div class="kbd-hint">
+    <kbd>P</kbd> Player &nbsp;
+    <kbd>T</kbd> Tie &nbsp;
+    <kbd>B</kbd> Banker &nbsp;
+    <kbd>⌫</kbd> Undo
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

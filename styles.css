@@ -1,0 +1,196 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #1a1a1a;
+  color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Top controls ── */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 6px;
+  background: #232323;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.app-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.controls-bar button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.controls-bar button:hover  { filter: brightness(1.15); }
+.controls-bar button:active { filter: brightness(0.9); }
+
+#btnBack  { background: #555; color: #fff; }
+#btnClear { background: #555; color: #fff; }
+#btnTop   { background: #555; color: #fff; min-width: 72px; }
+#btnTop.pinned { background: #b8860b; color: #fff; }
+
+#beadRows {
+  width: 52px;
+  padding: 5px 6px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #2e2e2e;
+  color: #e8e8e8;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.rows-label {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* ── Entry buttons ── */
+.entry-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 6px;
+  background: #232323;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.entry-bar button {
+  flex: 0 0 100px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: filter 0.12s, transform 0.1s;
+}
+.entry-bar button:hover  { filter: brightness(1.15); }
+.entry-bar button:active { transform: scale(0.97); }
+
+#btnPlayer { background: #00308F; color: #fff; }
+#btnTie    { background: #1a7a35; color: #fff; }
+#btnBanker { background: #c40000; color: #fff; }
+
+.hands-btn {
+  flex: 0 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2c2c2c;
+  border-radius: 8px;
+  padding: 5px 0;
+}
+.hands-btn .hb-label { font-size: 11px; color: #888; }
+.hands-btn .hb-count { font-size: 16px; font-weight: 700; color: #e8e8e8; }
+
+/* ── Count display ── */
+.count-bar {
+  display: flex;
+  gap: 8px;
+  padding: 4px 12px 6px;
+  background: #232323;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.count-cell {
+  flex: 0 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2c2c2c;
+  border-radius: 6px;
+  padding: 4px 0;
+}
+.count-cell .cc-label { font-size: 11px; color: #888; }
+.count-cell .cc-value { font-size: 16px; font-weight: 700; }
+.count-cell.player .cc-value { color: #4a82ff; }
+.count-cell.tie    .cc-value { color: #3ab85e; }
+.count-cell.banker .cc-value { color: #ff4444; }
+.count-cell.hands  .cc-value { color: #e8e8e8; }
+
+/* ── Tabs ── */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  background: #1a1a1a;
+  border-bottom: 2px solid #333;
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  padding: 7px 22px;
+  border: none;
+  background: transparent;
+  color: #888;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: #ccc; }
+.tab-btn.active {
+  color: #e8e8e8;
+  border-bottom-color: #c40000;
+}
+
+/* ── Canvas panels ── */
+.tab-panel {
+  display: none;
+  flex: 1;
+  overflow: auto;
+  background: #1a1a1a;
+  padding: 10px;
+}
+.tab-panel.active { display: block; }
+
+canvas {
+  display: block;
+  border-radius: 4px;
+}
+
+/* ── Keyboard hint ── */
+.kbd-hint {
+  text-align: center;
+  font-size: 11px;
+  color: #555;
+  padding: 3px 0 4px;
+  background: #1a1a1a;
+  flex-shrink: 0;
+}
+.kbd-hint kbd {
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-family: monospace;
+}
