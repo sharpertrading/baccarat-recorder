@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu, nativeImage } = require('electron');
+const { app, BrowserWindow, ipcMain, nativeImage } = require('electron');
 const path = require('path');
 
 let win;
@@ -23,20 +23,7 @@ function createWindow() {
 
   win.loadFile('index.html');
 
-  const menu = Menu.buildFromTemplate([
-    {
-      label: 'File',
-      submenu: [{ label: 'Exit', click: () => app.quit() }]
-    },
-    {
-      label: 'About',
-      submenu: [
-        { label: 'Baccarat Recorder v1.0', enabled: false },
-        { label: 'hammondcraig@yahoo.com', enabled: false }
-      ]
-    }
-  ]);
-  Menu.setApplicationMenu(menu);
+  Menu.setApplicationMenu(null);
 }
 
 ipcMain.handle('toggle-always-on-top', () => {
